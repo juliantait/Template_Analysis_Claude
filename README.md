@@ -168,13 +168,14 @@ Template/
 │   │   ├── researcher_interview.md  # Decision-tree PAP / research intention elicitation script
 │   │   ├── results_review_checklist.md  # 50+ item results review gate
 │   │   ├── subagent_protocol.md     # Agent spawning, output, and handoff rules
-│   │   ├── revision_protocol.md     # Multi-cycle revision and re-analysis protocol
-│   │   ├── skill_graphs.md          # Graph style guidelines
-│   │   └── skill_tables.md          # Table style guidelines
+│   │   └── revision_protocol.md     # Multi-cycle revision and re-analysis protocol
 │   └── Flow/
 │       ├── timeline.md              # Project progress tracker
 │       ├── codebook.md              # Variable-level data documentation
-│       └── research_log.md          # Chronological decision log
+│       ├── research_log.md          # Chronological decision log
+│       └── Tools/
+│           ├── skill_graphs.md      # Graph style guidelines
+│           └── skill_tables.md      # Table style guidelines
 │
 ├── main.R                              # Entry point — run this
 │

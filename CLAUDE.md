@@ -301,10 +301,10 @@ See `research_plan.md` for the full study design. It builds on the research basi
 ## Task-Specific Context
 
 ### Graphs
-If you are making a graph, study `Context/Roles/skill_graphs.md`.
+If you are making a graph, study `Context/Flow/Tools/skill_graphs.md`.
 
 ### Tables
-If you are making a table, study `Context/Roles/skill_tables.md`.
+If you are making a table, study `Context/Flow/Tools/skill_tables.md`.
 
 ### Writing
 If you are writing paper text or LaTeX, study `Context/Roles/researcher_profile.md` and the active personality profile for journal conventions.
@@ -439,15 +439,16 @@ Template/
 │   │   ├── results_review_checklist.md # Item-by-item results review gate checklist
 │   │   ├── subagent_protocol.md     # Subagent spawning, output, and handoff rules
 │   │   ├── revision_protocol.md     # Multi-cycle revision and re-analysis protocol
-│   │   ├── skill_graphs.md          # Graph style guidelines
-│   │   ├── skill_tables.md          # Table style guidelines
 │   │   ├── skill_overleaf_sync.md   # Overleaf sync protocol and setup
 │   │   └── skill_github_sync.md     # GitHub sync protocol and setup
 │   ├── Flow/
 │   │   ├── timeline.md              # Project progress snapshot
 │   │   ├── todo.md                  # Agent task queue (actionable work items)
 │   │   ├── codebook.md              # Variable-level data documentation
-│   │   └── research_log.md          # Chronological decision log
+│   │   ├── research_log.md          # Chronological decision log
+│   │   └── Tools/
+│   │       ├── skill_graphs.md      # Graph style guidelines
+│   │       └── skill_tables.md      # Table style guidelines
 │   └── Helpers/
 │       ├── latexsync.sh             # Blueprint: Overleaf sync shell function
 │       ├── gdone.sh                 # Blueprint: Git commit-and-push shell function
