@@ -56,7 +56,7 @@ Claude writes and runs R scripts from `main.R` in the project root:
 
 Cleaning runs once to produce `Data/data_cleaned.RData`. Normal analysis loads the pre-cleaned data and runs the analysis scripts sequentially. Claude manages this automatically.
 
-All output goes directly to the `LaTeX/` folder — `LaTeX/Figures/` (.png), `LaTeX/Tables/` (.tex), and `LaTeX/Text/` (.txt) — via helper functions in `Scripts/config_toolkit.R`. This keeps output co-located with the manuscript so LaTeX can reference files with simple relative paths. Files follow a consistent naming convention: `{script}_{analysis}_{descriptor}.{ext}`.
+All output goes to `LaTeX/Output/` — `LaTeX/Output/Figures/` (.png), `LaTeX/Output/Tables/` (.tex), and `LaTeX/Output/Text/` (.txt) — via helper functions in `Scripts/config_toolkit.R`. This keeps output co-located with the manuscript so LaTeX can reference files with simple relative paths (e.g. `Output/Figures/foo.png`). Files follow a consistent naming convention: `{script}_{analysis}_{descriptor}.{ext}`.
 
 ### Phase 4: Results review (quality gate)
 
@@ -213,21 +213,38 @@ Template/
     ├── discussion.tex
     ├── appendix.tex
     ├── references.bib
-    ├── Figures/                     # .png files (output from save_graph)
-    ├── Tables/                      # .tex files (output from save_table)
-    └── Text/                        # .txt files (output from save_text)
+    └── Output/
+        ├── Figures/                 # .png files (output from save_graph)
+        ├── Tables/                  # .tex files (output from save_table)
+        └── Text/                    # .txt files (output from save_text)
 ```
 
-## Output paths
+### Outputs
 
-Output is written directly to `LaTeX/Figures/`, `LaTeX/Tables/`, and `LaTeX/Text/` by the save functions in `Scripts/config_toolkit.R`. To also replicate output to external locations (e.g. Overleaf), add paths to `SYNC_DESTINATIONS` in `Scripts/config_init.R`:
+Analysis outputs are written to LaTeX/Output/, split across Figures/, Tables/, and Text/ subfolders. The LaTeX paper sources in LaTeX/ reference them with relative paths like Output/Figures/foo.png, so the LaTeX/ folder is self-contained and compiles wherever it lands.
+
+Need outputs in more than one place at the same time — e.g. a local Overleaf clone alongside the in-repo copy? Add the extra path to SYNC_DESTINATIONS in Scripts/config_init.R and every save_graph/save_table/save_text call writes to both:
 
 ```r
-# In Scripts/config_init.R:
 SYNC_DESTINATIONS <- c(
-  path.expand("/path/to/Overleaf/project")
+  path.expand("~/Overleaf/your-project/Output")
 )
 ```
+
+### Sync to Overleaf via git
+
+The LaTeX/ folder is designed to be the working tree of an Overleaf project. The flow is local-first: create a new empty Overleaf project, then push the local LaTeX/ contents up to it.
+
+Steps:
+1. Create a new empty project in Overleaf (web UI).
+2. In the project sidebar, open **Integrations → Git** and copy the projects git URL. URLs look like `https://git.overleaf.com/<project-id>`.
+3. In a terminal, from inside the local LaTeX/ folder, initialise a git repo if it is not one already: `cd LaTeX && git init`. The LaTeX folder is its own working tree, independent from the outer Template_Analysis_Claude repo.
+4. Add Overleaf as a remote and push: `git remote add overleaf <overleaf-git-url> && git push -u overleaf main:master`. Overleaf has historically used `master` as the default branch; if `main:master` is rejected, run `git ls-remote overleaf` to see the actual branch name.
+5. Subsequent edits: `git push overleaf main:master` from inside LaTeX/. To pull collaborator edits back, `git pull overleaf master`.
+
+Overleafs git integration is a premium feature — available on paid individual or group subscriptions and to Overleaf Commons participants. Free-plan projects will not show a Git option in Integrations.
+
+Full Overleaf-side guide: https://docs.overleaf.com/integrations-and-add-ons/git-integration-and-github-synchronization/git-integration
 
 ## Requirements
 

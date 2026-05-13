@@ -70,7 +70,7 @@ common_theme <- theme_minimal(base_size = 14) +
 
 # --- SAVE FUNCTIONS ----------------------------------------------------------
 # Each function writes to ALL paths in output_paths (local + sync destinations).
-output_paths <- c(OUTPUT_ROOT)
+output_paths <- c(OUTPUT_ROOT, SYNC_DESTINATIONS)
 
 save_graph <- function(plot, filename, width = 10, height = 6, dpi = 300) {
   for (path in output_paths) {

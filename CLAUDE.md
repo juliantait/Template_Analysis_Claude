@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This is a self-contained template for a single-study empirical analysis paper in economics. Run the analysis from `main.R` in the project root; output goes directly to `LaTeX/Figures/`, `LaTeX/Tables/`, and `LaTeX/Text/`.
+This is a self-contained template for a single-study empirical analysis paper in economics. Run the analysis from `main.R` in the project root; output goes directly to `LaTeX/Output/Figures/`, `LaTeX/Output/Tables/`, and `LaTeX/Output/Text/`.
 
 Check `Context/Flow/timeline.md` for the current project status — it shows which phases are done, in progress, or pending.
 
@@ -45,7 +45,7 @@ See `Context/Roles/researcher_profile.md` for general background on the research
 
 ## Project Structure
 
-This is a self-contained empirical analysis project. The entry point is `main.R` in the project root. Output is written directly to the `LaTeX/` folder — `LaTeX/Figures/` (.png), `LaTeX/Tables/` (.tex), and `LaTeX/Text/` (.txt) — via the `save_graph()`, `save_table()`, and `save_text()` helper functions defined in `Scripts/config_toolkit.R`. This keeps analysis output co-located with the manuscript source files, so LaTeX can reference them with simple relative paths (e.g. `Figures/filename.png`, `Tables/filename.tex`).
+This is a self-contained empirical analysis project. The entry point is `main.R` in the project root. Output is written to `LaTeX/Output/` — `LaTeX/Output/Figures/` (.png), `LaTeX/Output/Tables/` (.tex), and `LaTeX/Output/Text/` (.txt) — via the `save_graph()`, `save_table()`, and `save_text()` helper functions defined in `Scripts/config_toolkit.R`. This keeps analysis output co-located with the manuscript source files, so LaTeX can reference them with simple relative paths (e.g. `Output/Figures/filename.png`, `Output/Tables/filename.tex`).
 
 - Settings, palette, and theme: `Scripts/config_toolkit.R`
 - Data preparation: `Scripts/config_cleaning.R` (uses a data-source adapter from `Helper/`) → variable generation → `Scripts/sample_restrictions.R`
@@ -485,7 +485,8 @@ Template/
     ├── app_further.tex              # Further analyses appendix (available upon request)
     ├── appendix.tex
     ├── references.bib
-    ├── Figures/                     # .png files (output from save_graph)
-    ├── Tables/                      # .tex files (output from save_table)
-    └── Text/                        # .txt files (output from save_text)
+    └── Output/
+        ├── Figures/                 # .png files (output from save_graph)
+        ├── Tables/                  # .tex files (output from save_table)
+        └── Text/                    # .txt files (output from save_text)
 ```

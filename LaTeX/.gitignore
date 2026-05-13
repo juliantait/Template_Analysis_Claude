@@ -1,0 +1,47 @@
+# Compiled output
+*.pdf
+
+# Build intermediates
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.fmt
+*.fot
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.toc
+
+# Bibliography auxiliaries
+*-blx.aux
+*-blx.bib
+
+# Indexing
+*.idx
+*.ilg
+*.ind
+*.lol
+
+# Beamer
+*.nav
+*.snm
+*.vrb
+
+# Minted / pythontex
+_minted-*
+pythontex-files-*/
+
+# Editor backups
+*.tex~
+*.tex.swp
+.texpadtmp/
