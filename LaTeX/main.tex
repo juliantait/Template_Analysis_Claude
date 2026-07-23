@@ -4,6 +4,7 @@
 \usepackage[margin=1.25in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[british]{babel}
 \usepackage{hyperref}
 
 % --- Mathematics & theorem environments --------------------------------------
@@ -13,6 +14,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{hypothesis}{Hypothesis}
 \newtheorem{assumption}{Assumption}
 \newtheorem{result}{Result}
 \newtheorem{main}{Take-away}
@@ -35,6 +37,7 @@
 \usepackage{natbib}
 
 % --- Spacing -----------------------------------------------------------------
+\usepackage{setspace}
 \linespread{1.25}
 
 % --- Headers / footers -------------------------------------------------------
@@ -44,23 +47,25 @@
 
 % =============================================================================
 
-\title{Paper Title}
-\author{Author Names}
+\title{Paper Title\thanks{All studies were pre-registered on AsPredicted (\#XXXXX). Ethical approval was granted by the University of Amsterdam Economics and Business Ethics Committee (EB-XXXXX). We thank XXXXX for funding the project.}}
+\author{Author Names \\[0.5em] \small Institution}
 
 \begin{document}
 
 \maketitle
 \thispagestyle{empty}
 
-% Abstract
-\smallskip
-\noindent
-{\textbf{ABSTRACT.}
+\begin{abstract}
+\begin{singlespace}
 \input{abstract.tex}
-}
+\end{singlespace}
+\end{abstract}
 
 \medskip
-\noindent
+\noindent \textbf{JEL codes}: XXX, XXX, XXX
+
+\smallskip
+\noindent \textbf{Keywords}: keyword one; keyword two; keyword three
 
 \newpage
 \pagenumbering{arabic}
