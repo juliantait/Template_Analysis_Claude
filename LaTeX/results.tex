@@ -2,26 +2,37 @@
 
 \subsection{Balance Checks}
 
-[Randomisation balance discussion here.]
+[Randomisation balance discussion here. Unremarkable demographic balance belongs
+in a footnote, not a table.]
 
-% Example table inclusion:
+% Example table inclusion (caption above, notes in a minipage below the tabular):
 % \begin{table}[H]
 % \centering
-% \input{Output/Tables/balance_table.tex}
-% \caption{Balance across treatment groups.}
+% \caption{Covariate balance across treatment arms.}
 % \label{tab:balance}
+% \footnotesize
+% \input{Output/Tables/balance_table.tex}
+% \begin{minipage}{0.8\linewidth}
+% \footnotesize
+% \textit{Notes:} Unit of observation, sample, joint test and sidedness.
+% \end{minipage}
 % \end{table}
 
 \subsection{Main Results}
 
 [Main hypothesis test results here.]
 
-% Example figure inclusion:
+% Example figure inclusion (caption above, notes in a minipage below the graphic):
 % \begin{figure}[H]
 % \centering
-% \includegraphics[width=0.8\textwidth]{Output/Figures/hypothesis_1.png}
-% \caption{Description of figure.}
+% \caption{What is plotted, for which sample.}
+% \includegraphics[width=0.8\textwidth]{Output/Figures/hypotheses_h1_outcome_by_treatment.png}
 % \label{fig:h1}
+% \begin{minipage}{0.8\linewidth}
+% \footnotesize
+% \textit{Notes:} Unit of observation, sample, what the error bars show, test
+% type and sidedness.
+% \end{minipage}
 % \end{figure}
 
 \subsection{Robustness}

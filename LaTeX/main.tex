@@ -1,74 +1,71 @@
+% =============================================================================
+% Front matter follows the house default (see Context/Roles/researcher_profile.md,
+% "Front matter"). Do not restyle the title page, abstract, JEL/keywords block,
+% or page numbering without changing that convention first.
+% =============================================================================
 \documentclass[12pt]{article}
-
-% --- Page layout -------------------------------------------------------------
 \usepackage[margin=1.25in]{geometry}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+
 \usepackage[british]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
 \usepackage{hyperref}
-
-% --- Mathematics & theorem environments --------------------------------------
+\usepackage{enumitem}
 \usepackage{amsmath,amssymb,amsthm}
-
+\usepackage{eurosym}
+\usepackage{multirow}
+\usepackage{setspace}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{result}{Result}
 \newtheorem{hypothesis}{Hypothesis}
 \newtheorem{assumption}{Assumption}
-\newtheorem{result}{Result}
-\newtheorem{main}{Take-away}
 
-% --- Figures -----------------------------------------------------------------
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usepackage{float}
-\usepackage{xcolor}
-
-% --- Tables ------------------------------------------------------------------
+\usepackage{float}          % [H] placement used by the house figure/table templates
 \usepackage{booktabs}
-\usepackage{threeparttable}
-\usepackage{multirow}
-\usepackage{array}
-\usepackage{siunitx}
-\sisetup{group-digits=false, detect-weight=true, detect-family=true}
-
-% --- Bibliography ------------------------------------------------------------
 \usepackage{natbib}
 
-% --- Spacing -----------------------------------------------------------------
-\usepackage{setspace}
 \linespread{1.25}
 
-% --- Headers / footers -------------------------------------------------------
-\usepackage{fancyhdr}
+% Headers
 \fancyhf{}
+\rhead{}
+\lhead{}
 \cfoot{\thepage}
-
-% =============================================================================
-
-\title{Paper Title\thanks{All studies were pre-registered on AsPredicted (\#XXXXX). Ethical approval was granted by the University of Amsterdam Economics and Business Ethics Committee (EB-XXXXX). We thank XXXXX for funding the project.}}
-\author{Author Names \\[0.5em] \small Institution}
 
 \begin{document}
 
-\maketitle
-\thispagestyle{empty}
+\title{Paper Title\thanks{%
+Pre-registration details (AsPredicted / OSF, with links).
+Ethical approval was granted by [ethics committee] ([reference numbers]).
+We thank [funder] for funding the project.}}
 
+
+\author{
+Author One, Author Two \& Author Three\\[0.5em]
+\small Institution
+}
+
+\maketitle
+
+\noindent
 \begin{abstract}
 \begin{singlespace}
-\input{abstract.tex}
+\input{abstract.tex} \\
+
+\noindent \textbf{JEL codes}: XXX, XXX \\
+\noindent \textbf{Keywords}: keyword one, keyword two, keyword three
 \end{singlespace}
 \end{abstract}
 
-\medskip
-\noindent \textbf{JEL codes}: XXX, XXX, XXX
-
-\smallskip
-\noindent \textbf{Keywords}: keyword one; keyword two; keyword three
 
 \newpage
-\pagenumbering{arabic}
+
 
 \input{introduction.tex}
 \input{theory.tex}

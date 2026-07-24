@@ -20,7 +20,8 @@
 - Parametric tests (OLS, logit, etc.) serve as **robustness checks**, replicating the same predictions tested non-parametrically.
 - Standard errors in all parametric models are clustered at the group level.
 - The hypotheses script reports non-parametric results as the primary evidence; the robustness script re-tests the same predictions with regressions and controls.
-- In prose, report only: test type, p-value, and sidedness in parentheses — e.g. `(rank-sum test, $p=.71$, one-sided)`. Do **not** include test statistics ($z$, $W$, etc.).
+- In prose, report only: test type, p-value, and sidedness in parentheses — e.g. `(rank-sum test, $p=.712$, one-sided)`. Do **not** include test statistics ($z$, $W$, etc.). P-values always at three decimals, floored at `$p<.001$`.
+- Descriptive statistics quoted alongside a group-level test are computed **at the group level too**. Never pair an observation-level mean with a group-level p-value in the same paragraph.
 - Embed core numbers (percentages, means, monetary amounts, differences) directly in the sentence. State the comparison plainly before the parenthetical test.
 - Specify sidedness (one-sided or two-sided) consistent with the directional or non-directional nature of each hypothesis.
 - Specify the pairing structure of every test (independent samples or matched pairs).

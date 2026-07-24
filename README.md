@@ -74,9 +74,11 @@ The review produces `Context/Flow/results_review.md` with a Green/Amber/Red verd
 
 ### Phase 5: Paper drafting
 
-Claude writes the paper in LaTeX, section by section, into the `LaTeX/` folder. Independent sections (Introduction, Theory, Methods) can be drafted in parallel. Results and Discussion are written sequentially after the results review is complete. The Abstract is written last.
+Claude writes the paper in LaTeX, section by section, into the `LaTeX/` folder. The front matter in `LaTeX/main.tex` is the house default and is inherited by every new paper — title page, `\thanks` footnote (pre-registration, ethics approval, funding), author block, single-spaced abstract with the JEL codes and keywords set inside the abstract block, and page 1 numbered on the actual first page. Only the placeholders are filled in; the layout is not restyled per project. Independent sections (Introduction, Theory, Methods) can be drafted in parallel. Results and Discussion are written sequentially after the results review is complete. The Abstract is written last.
 
-All writing follows JEBO conventions defined in `Context/Roles/researcher_profile.md`: British English, concise academic prose, exact p-values with no leading zero, no test statistics in running text, booktabs tables, greyscale-robust figures.
+All writing follows JEBO conventions defined in `Context/Roles/researcher_profile.md`: British English, concise academic prose, three-decimal p-values with no leading zero (floored at `p<.001`), three-decimal estimates, no test statistics in running text, booktabs tables, greyscale-robust figures.
+
+Two conventions are worth knowing as a user: every number quoted in the paper must be produced by a script and exported to `LaTeX/Output/Text/` (nothing is hand-derived), and number formatting is fixed in the generating R script rather than in the `.tex` it produces. Helpers `fmt_p()`, `fmt_p_prose()`, and `fmt_est()` in `Scripts/config_toolkit.R` implement the rounding rules.
 
 ### Phase 6: Simulated referee report (quality gate)
 

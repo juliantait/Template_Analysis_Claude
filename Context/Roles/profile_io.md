@@ -37,7 +37,8 @@ Select the specific target journal at the start of the project and note it in `r
 
 ### Common Conventions
 
-- Report economic magnitudes, not just statistical significance. Elasticities, markups, consumer/producer surplus changes, and welfare effects are central to IO papers.
+- Report economic magnitudes, not just statistical significance. Elasticities, markups, consumer/producer surplus changes, and welfare effects are central to IO papers. Estimates at three decimals, p-values at three decimals floored at `$p<.001$` (shared profile conventions).
+- State the unit of observation (firm, product, market, transaction) for every reported statistic and keep quoted numbers at the unit of the estimation; do not mix market-level and transaction-level aggregation within a paragraph or table.
 - Market definition and boundaries should be stated explicitly and sensitivity-tested.
 - Data construction decisions (how products, firms, or markets are defined) should be transparent and logged in the codebook.
 - Discuss and, where possible, quantify the role of key assumptions (functional form, market definition, cost structure).

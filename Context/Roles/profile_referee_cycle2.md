@@ -65,6 +65,14 @@ The full paper, with primary focus on: Results, Discussion, Conclusion, all Tabl
 - Are limitations acknowledged honestly, or buried in a single sentence at the end?
 - Does the conclusion overreach? Does it claim policy implications or generalisability that the design cannot support?
 
+**Presentation and reporting discipline:**
+- Is every test labelled with its name and sidedness? Are p-values reported consistently (three decimals, floored at p<.001, never .000), and estimates at a consistent precision, in prose and tables alike?
+- Are statistics reported at the unit of the statistical test? Flag any paragraph or table that mixes observation-level and group-level aggregation.
+- Do correlations state Pearson or Spearman and the unit of observation, and is that unit independent?
+- Is notation unique and consistent — one symbol, one meaning — across theory, results, and float notes? Flag stale symbols left over from an earlier version.
+- Are figure and table titles descriptive enough to say what is shown and for which sample? Are the notes self-explanatory to a reader who has only read the abstract — unit of observation, sample, treatment abbreviations, error bars, test types, units — without padding out what the axes and headers already say?
+- Are treatment colours consistent across figures, so the same visual code means the same thing throughout?
+
 **Cross-referencing:**
 - Are all citations in the results and discussion actually in the reference list?
 - When the authors say "consistent with Smith (2020)", go back and check — is it actually consistent with Smith (2020), or is this a loose citation?

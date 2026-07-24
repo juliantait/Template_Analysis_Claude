@@ -20,7 +20,8 @@
 - Standard errors are clustered at the appropriate level dictated by the identification strategy (e.g. individual, firm, region).
 - Non-parametric and semi-parametric methods (e.g. local polynomial regression, kernel density estimation) supplement the main results where appropriate.
 - In tables, report: estimation method, number of observations, number of clusters, key coefficient(s), and standard errors in parentheses.
-- In prose, embed core numbers (coefficients, percentage-point changes, magnitudes) directly in the sentence. Test details follow in parentheses — e.g. `($p=.03$, one-sided)`. Do **not** report $t$-statistics in running text.
+- In prose, embed core numbers (coefficients, percentage-point changes, magnitudes) directly in the sentence. Test details follow in parentheses — e.g. `($p=.031$, one-sided)`. Do **not** report $t$-statistics in running text. Coefficients and p-values alike at three decimals, p floored at `$p<.001$`.
+- State the unit of observation and the clustering level once per analysis and keep quoted statistics at that unit; do not mix aggregation levels within a paragraph or a table.
 - Specify sidedness (one-sided or two-sided) consistent with the directional or non-directional nature of each hypothesis.
 - Robustness checks include: alternative specifications, placebo tests, sensitivity to bandwidth/functional form, and sample restrictions.
 - Identification assumptions must be discussed and, where possible, tested (e.g. parallel-trends plots for DiD, first-stage F-statistics for IV, density tests for RDD).

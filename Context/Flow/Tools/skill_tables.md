@@ -20,7 +20,11 @@ All tables must be publication-ready for the Journal of Economic Behavior & Orga
 - Avoid column numbers unless strictly necessary.
 - Align coefficients and SEs vertically; SEs always in parentheses below estimates.
 - British English spelling throughout.
-- Round estimates/means to 2 decimal places; p-values and SEs to 3 decimal places.
+- Round **all** estimates, means, differences, and SEs to **3 decimal places**. An estimate with |value| < 0.0005 prints as `0.000` (plain rounding to zero); never inequality notation such as `<0.001` or `>-0.001`.
+- P-values to 3 decimals, floored at `p<.001`; never printed as `0.000`. Same convention as the prose — coefficients may round to zero, p-values may not.
+- **Formatting is fixed in the generating R script, not in the `.tex` file.** Use `fmt_p()` and `fmt_est()` from `Scripts/config_toolkit.R` so tables and prose cannot drift apart.
+- Report figures at the **unit of the statistical test**; state that unit in the notes and do not mix aggregation levels within one table.
+- Treatment names in column headers, row stubs, and panel titles need not be ALL CAPS — normal case ("Low stakes", "High stakes") is fine inside the table, even though running text always uses ALL CAPS (LOW, HIGH). Keep whichever form is chosen identical across all tables. Captions and notes are prose: use ALL CAPS there.
 
 ---
 
@@ -52,20 +56,51 @@ All tables must be publication-ready for the Journal of Economic Behavior & Orga
 - Report overall column and joint test p-values.
 - Avoid overprecision.
 - Do not mix outcomes and covariates without clear separation.
+- **Demographic balance does not need a table.** Where balance is unremarkable, report it in a footnote of the design/data section instead of an appendix table; keep the generating script and its `.tex` output either way, so the numbers stay reproducible.
+- Describe cell sizes accurately: "approximately equal shares" unless assignment was hard-balanced by the software; verify against actual cell counts.
 
 ---
 
-## Notes and interpretation
-- Notes belong below the table, never inside cells.
-- Always specify: test type, pairing structure, direction of comparison, sidedness.
-- Keep notes concise and technical.
-- Implement notes in LaTeX using `\begin{minipage}` or `threeparttable`.
+## Titles, notes and interpretation
+
+- The caption is **usefully descriptive**: what is estimated or compared, for which sample, experiment, or specification.
+- **Notes always go in a `minipage` below the tabular**, in `\footnotesize`, as flowing text. Never as a `\multicolumn` row inside the tabular, and never inside cells. Same rule for figures (minipage below the graphic). This keeps note text from being stretched or wrapped by the column widths, and keeps line breaks under the paragraph's control rather than the table's.
+- Do not use `threeparttable` for notes — the minipage form below is the house style, so all floats look identical.
+- Always specify: test type, pairing structure, direction of comparison, sidedness, and the unit of observation.
+- Keep notes as compact as possible while still self-explanatory to a reader who has only read the abstract: unit of observation, sample and conditioning, treatment abbreviations spelled out, test types, units (currency, percentage points).
+- State only what the reader cannot infer — do not restate column headers, or symbols the facing page already defines. Self-explanatory ≠ self-contained.
+- **State the fact and stop**; let the reader draw the consequence. Spell one out only where genuinely counter-intuitive.
+- Note length scales with the table's **isolation, not its importance**: a table in running text stays terse; one in a tables-only appendix, reached by a bracketed cross-reference, earns a fuller note.
+- Symbols in notes obey the paper's notation rules — one symbol, one meaning; never reuse a symbol already defined in the theory.
+
+### Table template
+
+```latex
+\begin{table}[H]
+    \centering
+    \caption{Descriptive title: what is estimated, for which sample.}
+    \label{tab:label}
+    \footnotesize
+    \begin{tabular}{lcc}
+        \toprule
+        ... % tabular only -- no caption row, no notes row
+        \bottomrule
+    \end{tabular}
+    \begin{minipage}{0.8\linewidth}
+        \footnotesize
+        \textit{Notes:} Unit of observation, sample and conditioning, treatment
+        abbreviations spelled out, test type and sidedness, units.
+    \end{minipage}
+\end{table}
+```
 
 ---
 
 ## Export
 - Use `save_table(content, filename)` from `Scripts/config_toolkit.R`.
-- Output as `.tex` files to `LaTeX/Tables/`.
+- Output as `.tex` files to `LaTeX/Output/Tables/`.
+- The generated `.tex` contains the **tabular only** — no caption, no notes. Captions and notes are written in the LaTeX file that `\input`s it, so the note is a minipage below the tabular rather than a row inside it.
+- Suppress the table-generator's own note rows: `stargazer(..., notes = NULL)` and no `kableExtra::footnote()` / `add_footnote()` calls. These emit `\multicolumn` note rows inside the tabular, which is the form the house style forbids.
 - No manual spacing hacks beyond `\addlinespace`.
 - Same variable names and ordering across all tables.
 

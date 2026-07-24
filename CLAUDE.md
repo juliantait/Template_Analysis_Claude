@@ -171,6 +171,22 @@ When all parts are done, the researcher resets the file for the next batch.
 - British English spelling throughout all output.
 - Statistical methodology, test conventions, and standard-error choices are defined in the active researcher personality profile. See `Context/Roles/researcher_profile.md` and the linked personality file.
 
+### Reporting rules (non-negotiable)
+
+These apply to every script, table, figure note, and line of prose. Full detail in `Context/Roles/researcher_profile.md`.
+
+- **P-values**: 3 decimals, no leading zero, floor at `p<.001`; never `.000`. Same format in prose, footnotes, notes, and script-generated tables. Always state test name and sidedness.
+- **Estimates**: 3 decimals. |value| < 0.0005 prints as `0.000` (plain rounding); never `<0.001` or `>-0.001`. Coefficients may round to zero, p-values may not.
+- **Fix formatting in the generating R script**, never in the `.tex` file it produced. Use `fmt_p()`, `fmt_p_prose()`, `fmt_est()` from `Scripts/config_toolkit.R`.
+- **Aggregation unit**: report at the unit of the statistical test. Never mix observation-level and group-level aggregation within one paragraph or one table.
+- **Every scalar quoted in the paper is computed by a script** and exported via `save_text()` (the `OutputValues` pattern in `Scripts/descriptives.R` → `LaTeX/Output/Text/`). Never hand-derive or eyeball a number — including in the abstract, footnotes, and float notes. Re-check all quoted scalars after any re-run.
+- **Correlations**: state Pearson or Spearman, and the unit of observation (use the independent unit, e.g. participant, not participant × block).
+- **One symbol, one meaning.** Never reuse a symbol across concepts. When notation changes, grep the whole `LaTeX/` tree for stale variants, including function arguments and sub/superscripts.
+- **Treatment names are ALL CAPS in running text** (LOW, HIGH, PARTNERS, STRANGERS), every mention. Inside figures and tables, normal case is fine (axis labels, legends, column headers).
+- **Treatment colours**: a binary contrast uses the same two colours paper-wide (`col_treat_a` / `col_treat_b`), whatever the dimension; single-colour fills are reserved for non-treatment x-axes.
+- **Titles and notes**: descriptive titles (what, for which sample); notes compact but self-explanatory to a reader who has only read the abstract; state only what the reader cannot infer; note length scales with the float's isolation, not its importance.
+- **Notes always sit in a `minipage` below the tabular or graphic**, `\footnotesize`, flowing text — never a `\multicolumn` row inside the tabular. R-generated `.tex` holds the tabular only; caption and notes are written in the LaTeX file that `\input`s it.
+
 ### Script separation: main pipeline vs. further analysis
 
 The main analysis scripts (`balance_table.R` through `exploratory.R`) must contain **only analyses that are reported in the paper** — anything the reader will see in the main text or standard appendix tables. If a result is mentioned, cited, or displayed in the manuscript, the code that produces it lives in the main pipeline.
@@ -307,7 +323,13 @@ If you are making a graph, study `Context/Flow/Tools/skill_graphs.md`.
 If you are making a table, study `Context/Flow/Tools/skill_tables.md`.
 
 ### Writing
-If you are writing paper text or LaTeX, study `Context/Roles/researcher_profile.md` and the active personality profile for journal conventions.
+If you are writing paper text or LaTeX, study `Context/Roles/researcher_profile.md` and the active personality profile for journal conventions. Before quoting any number, check it exists in `LaTeX/Output/Text/` — if it does not, add it to the values script, re-run, then write.
+
+### Captions and notes
+If you are writing a figure caption, table caption, or float notes, study the "Captions and notes" section of `Context/Roles/researcher_profile.md` alongside the relevant skill file.
+
+### Front matter
+`LaTeX/main.tex` already carries the house front matter (title page, author block, abstract with the JEL/keywords block inside it, page 1 numbered on the first page). Fill in the placeholders — title, `\thanks` footnote, authors, affiliation, abstract, JEL codes, keywords — and do not restyle the layout. See "Front matter" in `Context/Roles/researcher_profile.md`.
 
 ### Referee Report
 If you are acting as a referee, study `Context/Roles/profile_referee.md` for the persona and report structure.

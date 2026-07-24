@@ -4,6 +4,13 @@
 # Compute summary statistics and key values referenced in the paper.
 # Uses the OutputValues class for structured output.
 # Output: Text file to Text/
+#
+# REPRODUCIBILITY RULE: every scalar quoted anywhere in the paper — abstract,
+# prose, footnotes, figure and table notes, discussion — must be computed here
+# (or in the script that owns that analysis) and exported via save_text().
+# Never hand-derive, hand-round, or read a number off the console. If the prose
+# needs a number no script produces, add it here first, re-run, then write.
+# Format numbers with fmt_est() / fmt_p() from config_toolkit.R.
 # =============================================================================
 cat("    -> Computing descriptive statistics\n")
 

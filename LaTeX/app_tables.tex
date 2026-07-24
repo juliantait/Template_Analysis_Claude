@@ -1,16 +1,20 @@
 \section{Additional Tables}\label{app:tables}
 
 % Tables must appear in the order they are first referenced in the main text.
+% Notes go in a minipage below the tabular -- never as a \multicolumn row inside
+% it, and not via threeparttable. A table parked in this appendix has no adjacent
+% prose to lean on, so its notes run fuller than a main-text table's.
 %
 % Example:
 % \begin{table}[H]
 % \centering
-% \begin{threeparttable}
-% \input{Output/Tables/robustness_regressions.tex}
-% \caption{Regression robustness checks.}
+% \caption{Regression robustness checks: alternative clustering and controls.}
 % \label{tab:app_robustness}
-% \begin{tablenotes}[flushleft]\small
-% \item \textit{Notes:} ...
-% \end{tablenotes}
-% \end{threeparttable}
+% \footnotesize
+% \input{Output/Tables/robustness_regressions.tex}
+% \begin{minipage}{0.8\linewidth}
+% \footnotesize
+% \textit{Notes:} Unit of observation, sample and conditioning, treatment
+% abbreviations spelled out, test type and sidedness, units.
+% \end{minipage}
 % \end{table}

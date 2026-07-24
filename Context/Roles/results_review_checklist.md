@@ -74,7 +74,7 @@ This is the core of the review. For each pre-registered hypothesis, determine wh
   - *What to look for:* Effects in the opposite direction from what was hypothesised. Also note null effects where a strong directional prediction was made.
   - *If this fails:* Record the direction honestly. A wrong-direction effect is still a finding and must be reported. Do not reframe the hypothesis post hoc to match the data.
 
-- [ ] **Statistical significance is assessed correctly.** For each test, confirm: (a) the correct test was used (as specified in the PAP), (b) sidedness matches the directional nature of the hypothesis, (c) the p-value is reported to the correct precision (per JEBO conventions: two decimal places, three if p < .01, floor at p < .001).
+- [ ] **Statistical significance is assessed correctly.** For each test, confirm: (a) the correct test was used (as specified in the PAP), (b) sidedness matches the directional nature of the hypothesis, (c) the p-value is reported to the correct precision (three decimal places, no leading zero, floor at p<.001 — see Section 9).
   - *What to look for:* One-sided tests used for non-directional hypotheses (or vice versa). Wrong test type (e.g., paired test on independent samples). Rounding errors in p-values.
   - *If this fails:* Fix the test specification in `hypotheses.R` and re-run. Log the correction.
 
@@ -211,6 +211,52 @@ These are warning signs that, individually, do not prove a problem but collectiv
 - [ ] **No contradictions between output files and script logic.** Spot-check that the output files are consistent with what the scripts claim to produce.
   - *What to look for:* A script comment saying "two-sided test" but the output reporting a one-sided p-value. A script fitting a logit but the output labelled as OLS. Labels in graphs or tables that do not match the variable definitions in the codebook.
   - *If this fails:* Fix the script or the output labels as appropriate. Re-run.
+
+---
+
+## 9. Reporting & Notation Compliance
+
+These checks verify that the output already obeys the paper's reporting conventions, before any of it is quoted in prose. Fixing formatting at this gate is cheap; fixing it after the manuscript quotes the numbers is not. Conventions are defined in `Context/Roles/researcher_profile.md`.
+
+- [ ] **P-values are formatted correctly in every output file.** Three decimals, no leading zero, floored at `p<.001`.
+  - *What to look for:* P-values printed as `0.000`, at two decimals, with inconsistent leading zeros, or in scientific notation. Formatting that differs between `.txt` values files and `.tex` tables.
+  - *If this fails:* Fix in the **generating script** using `fmt_p()` / `fmt_p_prose()` from `config_toolkit.R` — never by editing the `.tex`. Re-run.
+
+- [ ] **Estimates are rounded to three decimals, with no inequality notation.** Coefficients, means, differences, and SEs.
+  - *What to look for:* Two-decimal estimates, mixed precision across tables, or a near-zero coefficient displayed as `<0.001` or `>-0.001` instead of `0.000`. Also `-0.000`.
+  - *If this fails:* Route the numbers through `fmt_est()` in the generating script and re-run.
+
+- [ ] **Every test is labelled with its name and sidedness.** In script output and in the notes that will be carried into LaTeX.
+  - *What to look for:* Output reporting a bare p-value with no test named, or no one/two-sided statement. A one-sided p-value where the hypothesis is non-directional.
+  - *If this fails:* Add the label in the script. Cross-check sidedness against the research basis document.
+
+- [ ] **Aggregation unit is consistent and stated.** Each reported statistic sits at the unit of the test that accompanies it.
+  - *What to look for:* A group-level test paired with an observation-level mean in the same table or text block. Descriptives at the individual level feeding a paragraph whose tests are at the group level.
+  - *If this fails:* Recompute the descriptive at the testing unit, or split the reporting so each unit is stated explicitly. Log the choice.
+
+- [ ] **Correlations state type and unit.** Pearson or Spearman, plus the unit of observation.
+  - *What to look for:* An unlabelled correlation; a correlation computed on non-independent units (e.g. participant × block) where the participant is the independent unit.
+  - *If this fails:* Recompute at the independent unit and label the type in the output.
+
+- [ ] **Every scalar the paper will quote exists in `LaTeX/Output/Text/`.** Walk the planned results narrative and confirm each number has a script-generated source.
+  - *What to look for:* Numbers that only appear in console output, or that would have to be derived by hand from a table (differences, ratios, percentage changes).
+  - *If this fails:* Add the value to the values script (`OutputValues` → `save_text()`), re-run, and quote from the regenerated file.
+
+- [ ] **Notation is unique and current.** One symbol, one meaning across theory, scripts, and output labels.
+  - *What to look for:* A symbol serving two concepts (e.g. a correlation and a model probability). Stale variants left behind after a notation change, including inside function arguments and sub/superscripts.
+  - *If this fails:* Rename, then grep the whole `LaTeX/` tree and the scripts for every occurrence of the old form.
+
+- [ ] **Figures use the paper-wide treatment colour scheme.** Same two colours for every binary contrast; single-colour fills only on non-treatment x-axes.
+  - *What to look for:* A figure where the colour mapping flips between treatments, or where a non-treatment category axis is coloured with the treatment pair.
+  - *If this fails:* Fix the factor level order in cleaning and use `col_treat_a` / `col_treat_b`. Re-run the plotting script.
+
+- [ ] **Labels and orderings match across output.** Treatment names, variable names, and row/column ordering are identical in every figure and table.
+  - *What to look for:* The same treatment appearing under two different labels, or variables ordered differently between tables. Note that casing may legitimately differ between running text (ALL CAPS) and float internals (normal case) — what must not vary is the label itself, or the casing convention within the floats.
+  - *If this fails:* Harmonise labels at the cleaning stage, not per-script, and re-run.
+
+- [ ] **Treatment names are ALL CAPS everywhere in running text.** Prose, footnotes, captions, and float notes.
+  - *What to look for:* A treatment written as "the low-stakes condition" in one paragraph and "LOW" in the next; capitals dropped in captions or notes.
+  - *If this fails:* Fix in the LaTeX source. Figures and tables themselves are exempt — do not re-run scripts to capitalise axis labels or column headers.
 
 ---
 

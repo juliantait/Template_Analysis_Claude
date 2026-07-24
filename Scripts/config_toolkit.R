@@ -46,6 +46,18 @@ palette_lots <- c(
   "#004488"   # Very dark blue
 )
 
+# Paper-wide two-colour treatment scheme. Any binary treatment contrast uses
+# these two colours, in this order (first/left group = A, second/right = B),
+# whatever the dimension. Single-colour fills are reserved for non-treatment
+# x-axes (scenario categories, histograms). See Context/Flow/Tools/skill_graphs.md.
+col_treat_a <- palette_lots[1]  # Dark blue
+col_treat_b <- palette_lots[2]  # Pink-red
+
+# Usage: scale_fill_manual(values = treatment_colours(levels(data$treatment)))
+treatment_colours <- function(levels) {
+  setNames(palette_lots[seq_along(levels)], levels)
+}
+
 # --- GGPLOT THEME ------------------------------------------------------------
 common_theme <- theme_minimal(base_size = 14) +
   theme(
@@ -113,6 +125,31 @@ load_checkpoint <- function(envir = parent.frame()) {
 # --- HELPERS -----------------------------------------------------------------
 p_to_stars <- function(p) {
   ifelse(p < 0.001, "***", ifelse(p < 0.01, "**", ifelse(p < 0.05, "*", ifelse(p < 0.1, "+", ""))))
+}
+
+# --- NUMBER FORMATTING -------------------------------------------------------
+# Single source of truth for reported numbers. Every table, note, and quoted
+# scalar goes through these — fix formatting here or in the generating script,
+# never by hand-editing a .tex file.
+
+# P-values for table cells: 3 decimals, no leading zero, floored at .001.
+# Never ".000" — anything below .001 becomes "<.001".
+fmt_p <- function(p) {
+  ifelse(is.na(p), "",
+         ifelse(p < 0.001, "<.001", sub("^0", "", sprintf("%.3f", p))))
+}
+
+# P-values for prose and notes: "p=.034" / "p<.001".
+fmt_p_prose <- function(p) {
+  ifelse(is.na(p), "",
+         ifelse(p < 0.001, "p<.001", paste0("p=", fmt_p(p))))
+}
+
+# Estimates (coefficients, means, differences, SEs): 3 decimals. Values below
+# 0.0005 print as 0.000 — plain rounding, never "<0.001".
+fmt_est <- function(x, digits = 3) {
+  x <- ifelse(abs(x) < 0.5 * 10^(-digits), 0, x)  # kill "-0.000"
+  ifelse(is.na(x), "", sprintf(paste0("%.", digits, "f"), x))
 }
 
 # --- GLOBAL OPTIONS ----------------------------------------------------------

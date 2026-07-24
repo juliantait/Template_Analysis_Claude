@@ -358,8 +358,10 @@ For each LaTeX section affected by the analysis changes or the referee's comment
 
 1. Revise the text to reflect the new results.
 2. Ensure all tables and figures referenced in the text match the current `LaTeX/Tables/` and `LaTeX/Figures/` contents.
-3. Ensure that any new analyses are correctly labelled as exploratory if they were not in the pre-analysis plan.
-4. Do not patch --- rewrite the affected passages so the paper reads as a coherent whole.
+3. **Re-check every quoted scalar against the regenerated `LaTeX/Output/Text/` files** — abstract, prose, footnotes, and figure/table notes alike. A number that no longer has a script-generated source is a stale number; regenerate it rather than adjusting it by hand.
+4. If notation changed, grep the whole `LaTeX/` tree for stale variants, including function arguments and sub/superscripts.
+5. Ensure that any new analyses are correctly labelled as exploratory if they were not in the pre-analysis plan.
+6. Do not patch --- rewrite the affected passages so the paper reads as a coherent whole.
 
 ### Step 11: Write the Point-by-Point Response
 
